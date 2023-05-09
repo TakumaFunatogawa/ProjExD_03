@@ -156,7 +156,7 @@ def main():
         tmr += 1
         screen.blit(bg_img, [0, 0])
 
-        if bomb is not None: #爆弾が存在しているとき
+        if bomb is not None:  # 爆弾が存在しているとき
             bomb.update(screen)
             if bird._rct.colliderect(bomb._rct):
                 # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
@@ -173,6 +173,8 @@ def main():
             if bomb is not None and beam._rct.colliderect(bomb._rct):
                 beam = None
                 bomb = None
+                bird.change_img(6, screen)
+
         pg.display.update()
         clock.tick(1000)
 
