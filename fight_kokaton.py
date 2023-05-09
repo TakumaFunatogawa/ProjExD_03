@@ -50,7 +50,7 @@ class Bird:
             True,
             False
         )
-        # 練習3
+        # 練習3：押下キーに対する移動量の合計値タプルをキー、rotozoomしたこうかとん画像Surfaceを値とした辞書
         self._imgs = {
             (0, +1): pg.transform.rotozoom(self._img, -90.0, 1.0),
             (-1, +1): pg.transform.rotozoom(pg.transform.flip(self._img, True, False), 45.0, 1.0),
