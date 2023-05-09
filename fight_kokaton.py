@@ -49,6 +49,17 @@ class Bird:
             True,
             False
         )
+        # 練習3
+        self._imgs = {
+            (0, +1): pg.transform.rotozoom(self._img, -90.0, 1.0),
+            (-1, +1): pg.transform.rotozoom(pg.transform.flip(self._img, True, False), 45.0, 1.0),
+            (-1, 0): pg.transform.flip(self._img, True, False),
+            (-1, -1): pg.transform.rotozoom(pg.transform.flip(self._img, True, False), -45.0, 1.0),
+            (0, -1): pg.transform.rotozoom(self._img, 90.0, 1.0),
+            (+1, +1): pg.transform.rotozoom(self._img, -45.0, 1.0),
+            (+1, 0): self._img,
+            (+1, -1): pg.transform.rotozoom(self._img, 45.0, 1.0)
+        }
         self._rct = self._img.get_rect()
         self._rct.center = xy
 
@@ -68,13 +79,22 @@ class Bird:
         引数1 key_lst：押下キーの真理値リスト
         引数2 screen：画面Surface
         """
+        sum_mv = [0, 0]  # 練習3
         for k, mv in __class__._delta.items():
             if key_lst[k]:
                 self._rct.move_ip(mv)
+                sum_mv[0] += mv[0]  # 練習3
+                sum_mv[1] += mv[1]  # 練習3
+
         if check_bound(screen.get_rect(), self._rct) != (True, True):
             for k, mv in __class__._delta.items():
                 if key_lst[k]:
                     self._rct.move_ip(-mv[0], -mv[1])
+
+        # 練習3
+        if (sum_mv != [0, 0]):
+            self._img = self._imgs[tuple(sum_mv)]
+
         screen.blit(self._img, self._rct)
 
 
